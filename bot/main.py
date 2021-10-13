@@ -13,7 +13,7 @@ intents.members = True
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-bot = commands.Bot(command_prefix=config.CMD_PREFIX, help_command=None, intents=intents)
+bot = commands.Bot(command_prefix="!", help_command=None, intents=intents)
 
 if __name__ == '__main__':
     for filename in os.listdir(config.COGS_PATH):
