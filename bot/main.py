@@ -13,7 +13,7 @@ intents.members = True
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-bot = commands.Bot(command_prefix="!", help_command="pomoc", intents=intents)
+bot = commands.Bot(command_prefix="!", help_command="help", intents=intents)
 
 if __name__ == '__main__':
     for filename in os.listdir(config.COGS_PATH):
