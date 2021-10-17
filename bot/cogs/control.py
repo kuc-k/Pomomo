@@ -22,7 +22,7 @@ class Control(commands.Cog):
             await ctx.send(u_msg.ACTIVE_SESSION_EXISTS_ERR)
             return
         if not ctx.author.voice:
-            await ctx.send('Join a voice channel to use Pomomo!')
+            await ctx.send('Dołącz do kanału głosowego, aby korzystać z Pomi!')
             return
 
         session = Session(bot_enum.State.POMODORO,
@@ -42,10 +42,10 @@ class Control(commands.Cog):
         session = await session_manager.get_session(ctx)
         if session:
             if session.stats.pomos_completed > 0:
-                await ctx.send(f'Great job! '
-                               f'You completed {msg_builder.stats_msg(session.stats)}.')
+                await ctx.send(f'Świetna robota! '
+                               f'Ukończyłeś {msg_builder.stats_msg(session.stats)}.')
             else:
-                await ctx.send(f'See you again soon! 👋')
+                await ctx.send(f'Do zobaczenia wkrótce! 👋')
             await session_controller.end(session)
 
     @commands.command()
@@ -54,7 +54,7 @@ class Control(commands.Cog):
         if session:
             timer = session.timer
             if not timer.running:
-                await ctx.send('Timer is already paused.')
+                await ctx.send('Timer jest już wstrzymany.')
                 return
 
             await session.auto_shush.unshush(ctx)
@@ -69,12 +69,12 @@ class Control(commands.Cog):
         if session:
             timer = session.timer
             if session.timer.running:
-                await ctx.send('Timer is already running.')
+                await ctx.send('Timer jest już uruchomiony.')
                 return
 
             timer.running = True
             timer.end = t.time() + timer.remaining
-            await ctx.send(f'Resuming {session.state}.')
+            await ctx.send(f'Wznawianie {session.state}.')
             await session_controller.resume(session)
 
     @commands.command()
@@ -82,7 +82,7 @@ class Control(commands.Cog):
         session = await session_manager.get_session(ctx)
         if session:
             session.timer.set_time_remaining()
-            await ctx.send(f'Restarting {session.state}.')
+            await ctx.send(f'Restartowanie {session.state}.')
             if session.state == bot_enum.State.COUNTDOWN:
                 await countdown.start(session)
             else:
@@ -92,8 +92,8 @@ class Control(commands.Cog):
     async def skip(self, ctx):
         session = await session_manager.get_session(ctx)
         if session.state == bot_enum.State.COUNTDOWN:
-            ctx.send(f'Countdowns cannot be skipped. '
-                     f'Use {config.CMD_PREFIX}stop to end or {config.CMD_PREFIX}restart to start over.')
+            ctx.send(f'Odliczeń nie można pomijać. '
+                     f'Użyj {config.CMD_PREFIX}stop, aby zakończyć lub {config.CMD_PREFIX}restart, aby zacząć od nowa.')
         if session:
             stats = session.stats
             if stats.pomos_completed >= 0 and \
@@ -101,7 +101,7 @@ class Control(commands.Cog):
                 stats.pomos_completed -= 1
                 stats.minutes_completed -= session.settings.duration
 
-            await ctx.send(f'Skipping {session.state}.')
+            await ctx.send(f'Pomijanie {session.state}.')
             await state_handler.transition(session)
             await session_controller.resume(session)
 
@@ -109,8 +109,8 @@ class Control(commands.Cog):
     async def edit(self, ctx, pomodoro: int, short_break: int = None, long_break: int = None, intervals: int = None):
         session = await session_manager.get_session(ctx)
         if session.state == bot_enum.State.COUNTDOWN:
-            ctx.send(f'Countdowns cannot be edited. '
-                     f'Use {config.CMD_PREFIX}countdown to start a new one.')
+            ctx.send(f'Odliczeń nie można edytować. '
+                     f'Użyj {config.CMD_PREFIX}odliczanie do rozpoczęcia nowego.')
         if session:
             if not await Settings.is_valid(ctx, pomodoro, short_break, long_break, intervals):
                 return
@@ -130,14 +130,14 @@ class Control(commands.Cog):
             print(error)
 
     @commands.command()
-    async def countdown(self, ctx, duration: int, title='Countdown', audio_alert=None):
+    async def countdown(self, ctx, duration: int, title='Odliczanie', audio_alert=None):
         session = session_manager.active_sessions.get(session_manager.session_id_from(ctx.channel))
         if session:
-            await ctx.send('There is an active session running. '
-                           'Are you sure you want to start a countdown? (y/n)')
+            await ctx.send('Trwa aktywna sesja. '
+                           'Czy na pewno chcesz rozpocząć odliczanie? (y/n)')
             response = await self.client.wait_for('message', timeout=60)
             if not response.content.lower()[0] == 'y':
-                await ctx.send('OK, cancelling new countdown.')
+                await ctx.send('OK, anuluję nowe odliczanie.')
                 return
 
         if not 0 < duration <= 180:
