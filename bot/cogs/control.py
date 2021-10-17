@@ -60,7 +60,7 @@ class Control(commands.Cog):
             await session.auto_shush.unshush(ctx)
             timer.running = False
             timer.remaining = timer.end - t.time()
-            await ctx.send(f'Pausing {session.state}.')
+            await ctx.send(f'Wstrzymywanie {session.state}.')
             session.timeout = t.time() + config.PAUSE_TIMEOUT_SECONDS
 
     @commands.command()
