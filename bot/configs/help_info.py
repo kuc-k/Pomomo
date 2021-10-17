@@ -1,11 +1,11 @@
 from . import config
 
 
-SUMMARY = 'Pomomo helps keep you and your friends on track while you study together!\n' \
-          'Set periods of focus to get work done and chat during the breaks.\n\n' \
-          'Required parameters are enclosed in <> and optional parameters are enclosed in [].\n' \
-          f'For example, you can do \"{config.CMD_PREFIX}start\" to start a pomodoro session with the default values ' \
-          f'or \"{config.CMD_PREFIX}start 30 10\" to customize the pomodoro and short break durations!\n'
+SUMMARY = 'QmpEla pomaga utrzymać Ciebie i Twoich przyjaciół na dobrej drodze podczas wspólnej nauki!\n' \
+          'Wyznacz okresy skupienia na wykonanie pracy i rozmawiaj podczas przerw.\n\n' \
+          'Wymagane parametry są ujęte w <>, a opcjonalne w [].\n' \
+          f'Na przykład, możesz zrobić \"{config.CMD_PREFIX}start\" aby rozpocząć sesję pomodoro z wartościami domyślnymi ' \
+          f'lub \"{config.CMD_PREFIX}start 30 10\" aby dostosować czas trwania pomodoro i krótkich przerw!\n'
 
 POMO_ARGS = 'pomodoro: duration of each pomodoro interval in minutes (Default: 20 min)\n' \
             'short_break: duration of short breaks in minutes (Default: 5 min)\n' \
