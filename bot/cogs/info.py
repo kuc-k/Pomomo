@@ -18,20 +18,20 @@ class Info(commands.Cog):
         if help_embed:
             await ctx.send(embed=help_embed)
         else:
-            await ctx.send('Enter a valid command.')
+            await ctx.send('Wprowadź prawidłową komendę.')
 
     @commands.command()
     async def time(self, ctx):
         session = await session_manager.get_session(ctx)
         if session:
-            await ctx.send(f'{session.timer.time_remaining_to_str()} remaining on {session.state}!')
+            await ctx.send(f'{session.timer.time_remaining_to_str()} pozostały na {session.state}!')
 
     @commands.command()
     async def settings(self, ctx):
         session = await session_manager.get_session(ctx)
         if session:
             if session.state == bot_enum.State.COUNTDOWN:
-                await ctx.send('Countdowns do not have settings.')
+                await ctx.send('Odliczania nie mają ustawień.')
             else:
                 await ctx.send(embed=msg_builder.settings_embed(session))
 
@@ -40,19 +40,19 @@ class Info(commands.Cog):
         session = await session_manager.get_session(ctx)
         if session:
             if session.state == bot_enum.State.COUNTDOWN:
-                await ctx.send('Countdowns do not have stats.')
+                await ctx.send('Odliczania nie mają statystyk.')
             else:
                 stats = session.stats
                 if stats.pomos_completed > 0:
-                    await ctx.send(f'You\'ve completed {msg_builder.stats_msg(stats)} so far. ' +
+                    await ctx.send(f'Ukończyłeś {msg_builder.stats_msg(stats)} do tej pory. ' +
                                    choice(u_msg.ENCOURAGEMENTS))
                 else:
                     await ctx.send('Nie ukończyłeś jeszcze żadnej sesji pomodoro.')
 
     @commands.command()
     async def servers(self, ctx):
-        await ctx.send(f'Pomomo is in {len(self.client.guilds)} servers '
-                       f'with {len(session_manager.active_sessions)} active sessions!')
+        await ctx.send(f'Pomi jest na {len(self.client.guilds)} serwerach '
+                       f'z {len(session_manager.active_sessions)} aktywnych sesji!')
 
 
 def setup(client):
