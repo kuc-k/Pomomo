@@ -7,27 +7,27 @@ SUMMARY = 'QmpEla pomaga utrzymać Ciebie i Twoich przyjaciół na dobrej drodze
           f'Na przykład, możesz zrobić \"{config.CMD_PREFIX}start\" aby rozpocząć sesję pomodoro z wartościami domyślnymi ' \
           f'lub \"{config.CMD_PREFIX}start 30 10\" aby dostosować czas trwania pomodoro i krótkich przerw!\n'
 
-POMO_ARGS = 'pomodoro: duration of each pomodoro interval in minutes (Default: 20 min)\n' \
-            'short_break: duration of short breaks in minutes (Default: 5 min)\n' \
-            'long_break: duration of long breaks in minutes (Default: 15 min)\n' \
-            'intervals: number of pomodoro intervals between each long break (Default: 4)'
+POMO_ARGS = 'pomodoro: czas trwania każdego interwału pomodoro w minutach (Domyślnie: 20 min)\n' \
+            'short_break: czas trwania krótkich przerw w minutach (Domyślnie: 5 min)\n' \
+            'long_break: czas trwania długich przerw w minutach (Domyślnie: 15 min)\n' \
+            'intervals: liczba odstępów pomodoro pomiędzy każdą długą przerwą (Domyślnie: 4)'
 
 COUNTDOWN_ARGS = 'Enclose title in " " if longer than one word (Default: \"Countdown\").\n' \
                  'Add the \"mute\" parameter to disable the voice channel audio alert.\n\n' \
                  f'Example usage: {config.CMD_PREFIX}countdown 5 \"Finish homework!\" mute'
 
 COMMANDS = {'Control commands': {'start': ['start [pomodoro] [short_break] [long_break] [intervals]',
-                                           'Start pomodoro session with optional custom settings.\n\n' + POMO_ARGS],
+                                           'Rozpocznij sesję pomodoro z opcjonalnymi ustawieniami własnymi.\n\n' + POMO_ARGS],
                                  'pause': ['pause', 'Pause session'],
                                  'resume': ['resume', 'Resume session'],
                                  'restart': ['restart', 'Restart timer'],
-                                 'skip': ['skip', 'Skip current interval and start the next pomodoro or break.'],
+                                 'skip': ['skip', 'Pomiń bieżący interwał i rozpocznij następne pomodoro lub przerwę.'],
                                  'stop': ['stop', 'End session'],
                                  'edit': ['edit <pomodoro> [short_break] [long_break] [intervals]',
-                                          'Continue session with new settings\n\n' + POMO_ARGS],
+                                          'Kontynuuj sesję z nowymi ustawieniami\n\n' + POMO_ARGS],
                                  'countdown': ['countdown <duration> [title] [mute]',
-                                               'Start a countdown which sends a pinned message '
-                                               'with a timer that updates in real time.\n\n' +
+                                               'Rozpocznij odliczanie, które wysyła przypiętą wiadomość '
+                                               'z zegarem, który aktualizuje się w czasie rzeczywistym.\n\n' +
                                                COUNTDOWN_ARGS]
                                  },
             'Info commands': {'time': ['time', 'Get time remaining'],
