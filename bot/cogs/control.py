@@ -54,7 +54,7 @@ class Control(commands.Cog):
         if session:
             timer = session.timer
             if not timer.running:
-                await ctx.send('Timer jest już wstrzymany.')
+                await ctx.send('Timer wstrzymany.')
                 return
 
             await session.auto_shush.unshush(ctx)
@@ -69,7 +69,7 @@ class Control(commands.Cog):
         if session:
             timer = session.timer
             if session.timer.running:
-                await ctx.send('Timer jest już uruchomiony.')
+                await ctx.send('Timer uruchomiony.')
                 return
 
             timer.running = True
