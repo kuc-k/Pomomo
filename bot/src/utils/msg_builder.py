@@ -8,16 +8,16 @@ from ..session.Session import Session
 def settings_embed(session: Session) -> Embed:
     settings = session.settings
     settings_str = f'Pomodoro: {settings.duration} min\n' \
-               f'Short break: {settings.short_break} min\n' \
-               f'Long break: {settings.long_break} min\n' \
+               f'Krótka przerwa: {settings.short_break} min\n' \
+               f'Długa przerwa: {settings.long_break} min\n' \
                f'Intervals: {settings.intervals}'
-    embed = Embed(title='Session settings', description=settings_str, colour=Colour.orange())
+    embed = Embed(title='Ustawienia sesji', description=settings_str, colour=Colour.orange())
 
     vc = session.ctx.voice_client
     if vc:
-        footer = f'Connected to {vc.channel.name} voice channel'
+        footer = f'Podłączony do {vc.channel.name} kanał głosowy'
         if session.auto_shush.all:
-            footer += '\nAuto-shush is on'
+            footer += '\nAuto-shush jest włączony'
         embed.set_footer(text=footer)
 
     return embed
@@ -44,17 +44,17 @@ def help_embed(for_command) -> Embed:
 
 def stats_msg(stats: Stats):
     pomo_str = 'pomodoros'
-    minutes_str = 'minutes'
+    minutes_str = 'minut'
     hours_str: str
     if stats.minutes_completed >= 60:
-        hours_str = 'hours'
+        hours_str = 'godzin'
         hours_completed = int(stats.minutes_completed/60)
         if hours_completed == 1:
-            hours_str = 'hour'
+            hours_str = 'godzina'
         time_completed_str = f'{hours_completed} {hours_str}'
         minutes_completed = int(stats.minutes_completed % 60)
         if minutes_completed == 1:
-            minutes_str = 'minute'
+            minutes_str = 'minuta'
         if minutes_completed > 0:
             time_completed_str += f' {minutes_completed} {minutes_str}'
     else:
