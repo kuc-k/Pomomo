@@ -47,7 +47,7 @@ class Info(commands.Cog):
                     await ctx.send(f'You\'ve completed {msg_builder.stats_msg(stats)} so far. ' +
                                    choice(u_msg.ENCOURAGEMENTS))
                 else:
-                    await ctx.send('You haven\'t completed any pomodoros yet.')
+                    await ctx.send('Nie ukończyłeś jeszcze żadnej sesji pomodoro.')
 
     @commands.command()
     async def servers(self, ctx):
